@@ -13,13 +13,18 @@ mvn test
 
 | Entity | Description |
 |---|---|
-| `MenuItem` (abstract) → `Food`, `Drink`, `Dessert` | Items on the menu, each type with its own rules |
+| `MenuItem` (abstract) → `Food`, `Drink`, `Dessert` | Items on the menu, each type with its own price rule |
 | `Menu` | The restaurant menu (get the menu, find an item) |
 | `Customer` | The customer who places an order |
 | `Order` / `OrderLine` | An order and its lines (item + quantity) |
 | `Payment`, `PaymentMethod` → `CashPayment`, `CreditCardPayment` | Payments with different rules |
 
 **Operations:** get the menu, create an order, add / remove an item, get the order total, pay an order, cancel an order.
+
+**Menu item rules:**
+- *Food*: price is the base price; has a preparation time and a vegetarian flag.
+- *Drink*: alcoholic drinks add a 20% special consumption tax.
+- *Dessert*: serving with ice cream adds a fixed 15.00.
 
 **Payment rules:**
 - *Cash*: the given amount must cover the total; change is returned.
@@ -31,6 +36,7 @@ Dates are always passed as parameters – the system clock is never read.
 
 | Pattern | Where | Why |
 |---|---|---|
+| Template Method | `MenuItem.getPrice()` | Fixed price formula; each item type supplies only its own extra charge |
 | Strategy | `PaymentMethod` | Each payment method has its own validation rules |
 | State | `OrderState` (`Open`, `Paid`, `Cancelled`) | Allowed operations depend on the order status |
 | Factory | `MenuItemFactory` | Creates the right `MenuItem` subtype from a category |
@@ -45,6 +51,7 @@ All exceptions are **unchecked** and extend `RestaurantException`.
 RestaurantException
 ├── MenuItemNotFoundException
 ├── DuplicateMenuItemException
+├── InvalidMenuItemException
 ├── InvalidQuantityException
 ├── OrderNotFoundException
 ├── ItemNotInOrderException

@@ -24,6 +24,7 @@ class ExceptionHierarchyTest {
     void domainExceptionsExtendBaseException() {
         assertInstanceOf(RestaurantException.class, new MenuItemNotFoundException("m"));
         assertInstanceOf(RestaurantException.class, new DuplicateMenuItemException("m"));
+        assertInstanceOf(RestaurantException.class, new InvalidMenuItemException("m"));
         assertInstanceOf(RestaurantException.class, new InvalidQuantityException("m"));
         assertInstanceOf(RestaurantException.class, new OrderNotFoundException("m"));
         assertInstanceOf(RestaurantException.class, new ItemNotInOrderException("m"));

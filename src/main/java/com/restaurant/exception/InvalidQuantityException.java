@@ -1,7 +1,7 @@
 package com.restaurant.exception;
 
 /**
- * Thrown when a quantity or price is zero or negative.
+ * Thrown when the quantity of an order line is zero or negative.
  */
 public class InvalidQuantityException extends RestaurantException {
 
