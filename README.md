@@ -14,7 +14,8 @@ mvn test
 | Entity | Description |
 |---|---|
 | `MenuItem` (abstract) → `Food`, `Drink`, `Dessert` | Items on the menu, each type with its own price rule |
-| `Menu` | The restaurant menu (get the menu, find an item) |
+| `MenuItemFactory` | Creates the right `MenuItem` subtype and gives it a unique id |
+| `Menu` | The restaurant menu (get the menu, find / add / remove an item) |
 | `Customer` | The customer who places an order |
 | `Order` / `OrderLine` | An order and its lines (item + quantity) |
 | `Payment`, `PaymentMethod` → `CashPayment`, `CreditCardPayment` | Payments with different rules |
@@ -39,7 +40,7 @@ Dates are always passed as parameters – the system clock is never read.
 | Template Method | `MenuItem.getPrice()` | Fixed price formula; each item type supplies only its own extra charge |
 | Strategy | `PaymentMethod` | Each payment method has its own validation rules |
 | State | `OrderState` (`Open`, `Paid`, `Cancelled`) | Allowed operations depend on the order status |
-| Factory | `MenuItemFactory` | Creates the right `MenuItem` subtype from a category |
+| Factory | `MenuItemFactory` | Creates the right `MenuItem` subtype from a category and assigns ids, so clients depend only on `MenuItem` |
 | Observer | `OrderEventListener` | Notify interested parties when an order is paid / cancelled |
 | Repository | `OrderRepository` | Hides storage behind an interface (DIP, testability) |
 
