@@ -47,6 +47,14 @@ public abstract class MenuItem {
      */
     public abstract MenuCategory getCategory();
 
+    /**
+     * Returns whether only adult customers may order this item.
+     * Items are not age restricted unless a subclass says otherwise.
+     */
+    public boolean isAgeRestricted() {
+        return false;
+    }
+
     public String getId() {
         return id;
     }

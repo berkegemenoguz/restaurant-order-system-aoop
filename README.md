@@ -16,7 +16,7 @@ mvn test
 | `MenuItem` (abstract) → `Food`, `Drink`, `Dessert` | Items on the menu, each type with its own price rule |
 | `MenuItemFactory` | Creates the right `MenuItem` subtype and gives it a unique id |
 | `Menu` | The restaurant menu (get the menu, find / add / remove an item) |
-| `Customer` | The customer who places an order |
+| `Customer` | The customer who places an order; age is calculated on a given date |
 | `Order` / `OrderLine` | An order and its lines (item + quantity) |
 | `Payment`, `PaymentMethod` → `CashPayment`, `CreditCardPayment` | Payments with different rules |
 
@@ -26,6 +26,11 @@ mvn test
 - *Food*: price is the base price; has a preparation time and a vegetarian flag.
 - *Drink*: alcoholic drinks add a 20% special consumption tax.
 - *Dessert*: serving with ice cream adds a fixed 15.00.
+
+**Order rules:**
+- Adding an item that is already in the order increases its quantity.
+- Alcoholic drinks can only be ordered by customers who are 18 or older on the order date.
+- Removing more than the ordered quantity, or an item that is not in the order, fails.
 
 **Payment rules:**
 - *Cash*: the given amount must cover the total; change is returned.
@@ -54,6 +59,9 @@ RestaurantException
 ├── DuplicateMenuItemException
 ├── InvalidMenuItemException
 ├── InvalidQuantityException
+├── InvalidCustomerException
+├── InvalidOrderException
+├── AgeRestrictionException
 ├── OrderNotFoundException
 ├── ItemNotInOrderException
 ├── InvalidOrderStateException

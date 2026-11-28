@@ -35,6 +35,14 @@ public class Drink extends MenuItem {
         return MenuCategory.DRINK;
     }
 
+    /**
+     * Alcoholic drinks may only be ordered by adult customers.
+     */
+    @Override
+    public boolean isAgeRestricted() {
+        return alcoholic;
+    }
+
     public int getVolumeMl() {
         return volumeMl;
     }

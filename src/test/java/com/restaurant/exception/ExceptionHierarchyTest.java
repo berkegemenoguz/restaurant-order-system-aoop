@@ -31,6 +31,9 @@ class ExceptionHierarchyTest {
         assertInstanceOf(RestaurantException.class, new InvalidOrderStateException("m"));
         assertInstanceOf(RestaurantException.class, new EmptyOrderException("m"));
         assertInstanceOf(RestaurantException.class, new PaymentException("m"));
+        assertInstanceOf(RestaurantException.class, new InvalidCustomerException("m"));
+        assertInstanceOf(RestaurantException.class, new InvalidOrderException("m"));
+        assertInstanceOf(RestaurantException.class, new AgeRestrictionException("m"));
     }
 
     @Test

@@ -6,7 +6,9 @@ import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class DrinkTest {
 
@@ -30,5 +32,15 @@ class DrinkTest {
     @Test
     void zeroVolumeThrowsInvalidMenuItemException() {
         assertThrows(InvalidMenuItemException.class, () -> new Drink("D1", "Cola", BigDecimal.TEN, 0, false));
+    }
+
+    @Test
+    void alcoholicDrinkIsAgeRestricted() {
+        assertTrue(new Drink("D2", "Beer", BigDecimal.TEN, 500, true).isAgeRestricted());
+    }
+
+    @Test
+    void nonAlcoholicDrinkIsNotAgeRestricted() {
+        assertFalse(new Drink("D1", "Cola", BigDecimal.TEN, 330, false).isAgeRestricted());
     }
 }
